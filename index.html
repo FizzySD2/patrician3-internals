@@ -385,7 +385,7 @@ redraws only the dirty rectangles.</li>
 <details class="code"><summary>Where it lives in the code</summary><div class="table-wrap"><table class="files"><thead><tr><th scope="col">File</th><th scope="col">What is there</th></tr></thead><tbody><tr><td><code class="path">cpp/src/classes/CScreen.cpp</code></td><td><code>OpenScreen</code> <span class="addr">004b6ce0</span>, <code>Update</code> <span class="addr">004b6e80</span>, <code>ProcessFrame</code> <span class="addr">004b6c70</span>, <code>ScreenHitTestChildren</code> <span class="addr">004b7240</span></td></tr><tr><td><code class="path">cpp/src/classes/CViperButton.cpp</code></td><td><code>HandleMouse</code> <span class="addr">004c6b90</span>, <code>Draw</code> <span class="addr">004c74c0</span></td></tr><tr><td><code class="path">cpp/src/classes/CViperSlider.cpp</code></td><td><code>HandleMouse</code> <span class="addr">004cf890</span></td></tr><tr><td><code class="path">cpp/src/classes/CGameWindow.cpp</code></td><td><code>GameWindowOnMouseMove</code> <span class="addr">004c0d30</span></td></tr><tr><td><code class="path">cpp/src/classes/C_OPTIONS.cpp</code></td><td>the Options screen; settings are stored in <code>P2.CFG</code></td></tr><tr><td><code class="path">manual/extra/p3_16_9.cpp</code></td><td>resolution, display mode and the checkbox, stored in <code>high_res.ini</code></td></tr></tbody></table></div></details>
 </section>
 <section class="sys" id="graphics" aria-labelledby="graphics-t">
-<header class="sys-head"><p class="eyebrow">Engine and interface</p><h2 id="graphics-t">Graphics and the Direct3D 11 renderer</h2><p class="lead">The game never draws by itself: it calls 180 functions of a separate graphics library. In P3R that library is a Direct3D 11 renderer, which also adds 16:9 resolutions and the display modes.</p></header>
+<header class="sys-head"><p class="eyebrow">Engine and interface</p><h2 id="graphics-t">Graphics and the Direct3D 11 renderer</h2><p class="lead">The game never draws by itself: it calls 180 functions of a separate graphics library. In P3R that library is a Direct3D 11 renderer by onefingerman, which also adds 16:9 resolutions and the display modes.</p></header>
 <div class="figures"><figure class="shot"><img src="img/mappa_veloce.jpg" alt="Fast map in a centered 5:4 frame on a 16:9 screen" width="1280" height="720" loading="lazy"><figcaption>The fast map at 1600×900. The game designed it for 5:4; the renderer scales it into the middle and fills the sides with black.</figcaption></figure></div>
 <div class="sys-body">
 <p>When the game starts it loads <code>ddraw_Dll.dll</code> and looks up 180 functions by name: draw a bitmap,
@@ -402,6 +402,9 @@ top bar and the right column to the edge.</li>
 <li><strong>Transparency.</strong> Parchments and shadows are images without an alpha channel drawn with a constant
 transparency. The renderer has a blend mode just for this.</li>
 </ul>
+<p><strong>Credits.</strong> The Direct3D 11 renderer, the <code>ddraw_Dll.dll</code> that P3R loads, is the work of
+onefingerman, released under the Apache 2.0 license. Its source is at
+<a href="https://github.com/onethree7/patrizier3_d3d11">github.com/onethree7/patrizier3_d3d11</a>.</p>
 </div>
 <details class="code"><summary>Where it lives in the code</summary><div class="table-wrap"><table class="files"><thead><tr><th scope="col">File</th><th scope="col">What is there</th></tr></thead><tbody><tr><td><code class="path">cpp/src/units/unit_4bad00.cpp</code></td><td><code>LoadSglLibrary</code> <span class="addr">004bad00</span> and the small bridge functions to the library</td></tr><tr><td><code class="path">cpp/src/classes/CSGLFont.cpp</code></td><td>fonts from <code>scripts/fonts.ini</code></td></tr><tr><td><code class="path">manual/extra/p3_16_9_layout.cpp</code></td><td>the top bar, the right column and the fast map at 16:9</td></tr><tr><td><code class="path">patrizier3_d3d11/src/memory_texture.cpp</code></td><td>the 180 library functions: images, drawing, text</td></tr><tr><td><code class="path">patrizier3_d3d11/src/presentation.cpp</code></td><td>window, display modes, exclusive full screen, Alt+Tab</td></tr><tr><td><code class="path">patrizier3_d3d11/src/display_config.cpp</code></td><td>reading <code>high_res.ini</code></td></tr></tbody></table></div></details>
 </section>
@@ -938,7 +941,8 @@ second one proves function by function that renaming did not change the machine 
 </section>
 <footer class="foot"><p>Where the code alone could not settle a detail, the text says so. Values marked as
 measured come from the game's own data tables. Patrician III is a game by Ascaron Entertainment; screenshots are
-from the original game data running in P3R.</p></footer>
+from the original game data running in P3R. The Direct3D 11 renderer that P3R draws with is by onefingerman
+(<a href="#graphics">Graphics</a>).</p></footer>
 </main>
 </div>
 </div>
